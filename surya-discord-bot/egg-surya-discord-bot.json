@@ -15,7 +15,7 @@
         "Nodejs 20": "ghcr.io\/ptero-eggs\/yolks:nodejs_20"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; echo 'Building TypeScript...'; npm run build; echo 'Starting bot...'; npm run start",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; npm install; echo 'Building TypeScript...'; npm run build; echo 'Starting bot...'; npm run start",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": [\r\n        \"Surya Matchmaking Bot is now online!\",\r\n        \"Ready for matchmaking!\",\r\n        \"Logged in as:\"\r\n    ]\r\n}",
