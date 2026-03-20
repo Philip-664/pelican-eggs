@@ -5,3 +5,7 @@ Custom eggs for [Pelican Panel](https://pelican.dev).
 ### [Surya Discord Bot (TypeScript)](surya-discord-bot)
 
 [Discord.js](https://discord.js.org/) v14 TypeScript bot for matchmaking and game room management.
+
+### [SellAuth Discord Bot](sellauth-discord-bot)
+
+[Discord.js](https://discord.js.org/) v14 bot for SellAuth invoice, replacement, and coupon management.
