@@ -6,8 +6,8 @@
     },
     "exported_at": "2026-01-07T20:30:00+01:00",
     "name": "Surya Discord Bot (TypeScript)",
-    "author": "custom",
-    "uuid": "surya-discord-bot-ts-v1",
+    "author": "admin@example.com",
+    "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "description": "Discord.js v14 TypeScript bot for matchmaking and game room management. Automatically builds TypeScript to JavaScript and runs the compiled code.",
     "tags": ["discord", "bot", "typescript", "matchmaking"],
     "features": null,
@@ -39,10 +39,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": [
-                "required",
-                "string"
-            ],
+            "rules": "required|string",
             "sort": 1
         },
         {
@@ -52,10 +49,7 @@
             "default_value": "main",
             "user_viewable": true,
             "user_editable": true,
-            "rules": [
-                "nullable",
-                "string"
-            ],
+            "rules": "nullable|string",
             "sort": 2
         },
         {
@@ -65,10 +59,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": [
-                "nullable",
-                "string"
-            ],
+            "rules": "nullable|string",
             "sort": 3
         },
         {
@@ -78,10 +69,7 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": [
-                "nullable",
-                "string"
-            ],
+            "rules": "nullable|string",
             "sort": 4
         },
         {
@@ -91,10 +79,7 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": [
-                "required",
-                "boolean"
-            ],
+            "rules": "required|boolean",
             "sort": 5
         },
         {
@@ -104,10 +89,7 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": [
-                "required",
-                "boolean"
-            ],
+            "rules": "required|boolean",
             "sort": 6
         }
     ]
