@@ -1,10 +1,7 @@
-# Pelican Panel Eggs
+# Philip-Tech Eggs
 
 Custom eggs for [Pelican Panel](https://pelican.dev).
 
-## Available Eggs
+### [Surya Discord Bot (TypeScript)](surya-discord-bot)
 
-| Egg | Description |
-|-----|-------------|
-| [Surya Discord Bot (TypeScript)](./eggs/surya-discord-bot/) | Discord.js v14 TypeScript matchmaking bot |
-
+[Discord.js](https://discord.js.org/) v14 TypeScript bot for matchmaking and game room management.
