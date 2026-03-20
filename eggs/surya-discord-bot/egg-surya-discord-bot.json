@@ -1,0 +1,114 @@
+{
+    "_comment": "Pelican Panel Egg for Surya Discord Matchmaking Bot",
+    "meta": {
+        "version": "PLCN_v1",
+        "update_url": null
+    },
+    "exported_at": "2026-01-07T20:30:00+01:00",
+    "name": "Surya Discord Bot (TypeScript)",
+    "author": "custom",
+    "uuid": "surya-discord-bot-ts-v1",
+    "description": "Discord.js v14 TypeScript bot for matchmaking and game room management. Automatically builds TypeScript to JavaScript and runs the compiled code.",
+    "tags": ["discord", "bot", "typescript", "matchmaking"],
+    "features": null,
+    "docker_images": {
+        "Nodejs 22": "ghcr.io/pelican-eggs/yolks:nodejs_22",
+        "Nodejs 21": "ghcr.io/pelican-eggs/yolks:nodejs_21",
+        "Nodejs 20": "ghcr.io/pelican-eggs/yolks:nodejs_20"
+    },
+    "file_denylist": [],
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; echo 'Building TypeScript...'; npm run build; echo 'Starting bot...'; npm run start",
+    "config": {
+        "files": "{}",
+        "startup": "{\n    \"done\": [\n        \"Surya Matchmaking Bot is now online!\",\n        \"Ready for matchmaking!\",\n        \"Logged in as:\"\n    ]\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!/bin/bash\n# Surya Discord Bot Installation Script\n#\n# Server Files: /mnt/server\napt update\napt install -y git curl jq file unzip make gcc g++ python3 python3-dev libtool\n\necho -e \"Updating npm to latest version...\"\nnpm install npm@latest --location=global\n\nmkdir -p /mnt/server\ncd /mnt/server\n\nif [ \"${USER_UPLOAD}\" == \"true\" ] || [ \"${USER_UPLOAD}\" == \"1\" ]; then\n    echo -e \"User upload mode - skipping git clone\"\n    exit 0\nfi\n\n## Add git ending if it's not on the address\nif [[ ${GIT_ADDRESS} != *.git ]]; then\n    GIT_ADDRESS=${GIT_ADDRESS}.git\nfi\n\nif [ -z \"${USERNAME}\" ] && [ -z \"${ACCESS_TOKEN}\" ]; then\n    echo -e \"Using anonymous git clone\"\nelse\n    GIT_ADDRESS=\"https://${USERNAME}:${ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\nfi\n\n## Pull git repo\nif [ \"$(ls -A /mnt/server)\" ]; then\n    echo -e \"/mnt/server directory is not empty.\"\n    if [ -d .git ]; then\n        echo -e \".git directory exists\"\n        if [ -f .git/config ]; then\n            echo -e \"Loading info from git config\"\n            ORIGIN=$(git config --get remote.origin.url)\n        else\n            echo -e \"Files found with no git config\"\n            echo -e \"Exiting to avoid breaking existing files\"\n            exit 10\n        fi\n    fi\n\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\n        echo \"Pulling latest from git repository\"\n        git pull\n    fi\nelse\n    echo -e \"/mnt/server is empty.\\nCloning repository...\"\n    if [ -z ${BRANCH} ]; then\n        echo -e \"Cloning default branch\"\n        git clone ${GIT_ADDRESS} .\n    else\n        echo -e \"Cloning branch: ${BRANCH}\"\n        git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .\n    fi\nfi\n\necho \"Installing Node.js dependencies...\"\nif [ -f /mnt/server/package.json ]; then\n    /usr/local/bin/npm install\nelse\n    echo \"ERROR: package.json not found!\"\n    exit 1\nfi\n\necho \"Building TypeScript project...\"\nif [ -f /mnt/server/tsconfig.json ]; then\n    /usr/local/bin/npm run build\n    if [ $? -eq 0 ]; then\n        echo \"TypeScript build successful!\"\n    else\n        echo \"ERROR: TypeScript build failed!\"\n        exit 1\n    fi\nelse\n    echo \"WARNING: tsconfig.json not found, skipping build\"\nfi\n\necho \"Checking for .env file...\"\nif [ ! -f /mnt/server/.env ]; then\n    echo \"WARNING: .env file not found!\"\n    echo \"Creating .env template from .env.example...\"\n    if [ -f /mnt/server/.env.example ]; then\n        cp /mnt/server/.env.example /mnt/server/.env\n        echo \"Please configure your .env file with Discord bot token and settings!\"\n    else\n        echo \"ERROR: .env.example not found. You need to create .env manually!\"\n    fi\nfi\n\necho -e \"Installation complete!\"\necho -e \"IMPORTANT: Make sure to configure your .env file before starting the bot!\"\nexit 0",
+            "container": "node:20-bookworm-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Git Repo Address",
+            "description": "GitHub repository URL for the Surya bot.\nExample: https://github.com/yourusername/Surya-Bot",
+            "env_variable": "GIT_ADDRESS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "string"
+            ],
+            "sort": 1
+        },
+        {
+            "name": "Install Branch",
+            "description": "Git branch to install (leave empty for default branch, usually 'main' or 'master')",
+            "env_variable": "BRANCH",
+            "default_value": "main",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": 2
+        },
+        {
+            "name": "Git Username",
+            "description": "Username for private repositories (optional)",
+            "env_variable": "USERNAME",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": 3
+        },
+        {
+            "name": "Git Access Token",
+            "description": "Personal Access Token for private repositories (optional).\nCreate at: https://github.com/settings/tokens",
+            "env_variable": "ACCESS_TOKEN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "nullable",
+                "string"
+            ],
+            "sort": 4
+        },
+        {
+            "name": "Auto Update",
+            "description": "Automatically pull latest changes from git on startup.\n0 = disabled, 1 = enabled",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": 5
+        },
+        {
+            "name": "User Uploaded Files",
+            "description": "Skip git clone if you manually upload files.\n0 = use git (default), 1 = manual upload",
+            "env_variable": "USER_UPLOAD",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": 6
+        }
+    ]
+}
