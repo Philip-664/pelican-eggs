@@ -9,7 +9,12 @@
     "author": "custom",
     "uuid": "surya-discord-bot-ts-v1",
     "description": "Discord.js v14 TypeScript bot for matchmaking and game room management. Automatically builds TypeScript to JavaScript and runs the compiled code.",
-    "tags": ["discord", "bot", "typescript", "matchmaking"],
+    "tags": [
+        "discord",
+        "bot",
+        "typescript",
+        "matchmaking"
+    ],
     "features": null,
     "docker_images": {
         "Nodejs 22": "ghcr.io/pelican-eggs/yolks:nodejs_22",
@@ -17,7 +22,7 @@
         "Nodejs 20": "ghcr.io/pelican-eggs/yolks:nodejs_20"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; echo 'Building TypeScript...'; npm run build; echo 'Starting bot...'; npm run start",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; npm install; echo 'Building TypeScript...'; npm run build; echo 'Starting bot...'; npm run start",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Surya Matchmaking Bot is now online!\",\n        \"Ready for matchmaking!\",\n        \"Logged in as:\"\n    ]\n}",
@@ -39,7 +44,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 1
         },
         {
@@ -49,7 +57,10 @@
             "default_value": "main",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 2
         },
         {
@@ -59,7 +70,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 3
         },
         {
@@ -69,7 +83,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 4
         },
         {
@@ -79,7 +96,10 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "boolean"],
+            "rules": [
+                "required",
+                "boolean"
+            ],
             "sort": 5
         },
         {
@@ -89,7 +109,10 @@
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "boolean"],
+            "rules": [
+                "required",
+                "boolean"
+            ],
             "sort": 6
         },
         {
@@ -99,7 +122,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "string"],
+            "rules": [
+                "required",
+                "string"
+            ],
             "sort": 7
         },
         {
@@ -109,7 +135,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "string"],
+            "rules": [
+                "required",
+                "string"
+            ],
             "sort": 8
         },
         {
@@ -119,7 +148,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "string"],
+            "rules": [
+                "required",
+                "string"
+            ],
             "sort": 9
         },
         {
@@ -129,7 +161,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "string"],
+            "rules": [
+                "required",
+                "string"
+            ],
             "sort": 10
         },
         {
@@ -139,7 +174,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "string"],
+            "rules": [
+                "required",
+                "string"
+            ],
             "sort": 11
         },
         {
@@ -149,7 +187,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 12
         },
         {
@@ -159,7 +200,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 13
         },
         {
@@ -169,7 +213,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 14
         },
         {
@@ -179,7 +226,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 15
         },
         {
@@ -189,7 +239,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 16
         },
         {
@@ -199,7 +252,10 @@
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["nullable", "string"],
+            "rules": [
+                "nullable",
+                "string"
+            ],
             "sort": 17
         },
         {
@@ -209,7 +265,10 @@
             "default_value": "2v2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "string"],
+            "rules": [
+                "required",
+                "string"
+            ],
             "sort": 18
         },
         {
@@ -219,7 +278,10 @@
             "default_value": "60",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "numeric"],
+            "rules": [
+                "required",
+                "numeric"
+            ],
             "sort": 19
         },
         {
@@ -229,7 +291,10 @@
             "default_value": "30",
             "user_viewable": true,
             "user_editable": true,
-            "rules": ["required", "numeric"],
+            "rules": [
+                "required",
+                "numeric"
+            ],
             "sort": 20
         }
     ]
